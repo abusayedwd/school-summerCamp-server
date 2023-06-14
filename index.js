@@ -41,11 +41,25 @@ async function run() {
         res.send(result)
   })
 
+
+ // addclass api used
   app.post('/addClass', async(req,res) => {
         const item = req.body;
         const result = await addClassCollection.insertOne(item)
         res.send(result)
       })
+
+      app.get('/addClass',  async(req,res) => {
+        const email = req.query.email;
+        if(!email){
+          res.send([]);
+        }
+         
+
+        const query = {email: email}
+          const result = await addClassCollection.find(query).toArray();
+          res.send(result) 
+  });
 
 
     // Send a ping to confirm a successful connection
