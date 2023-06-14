@@ -28,8 +28,9 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
-    const  classesCollection = client.db("sportsDB").collection("classes");
-    const  instructorsCollection = client.db("sportsDB").collection("intructors");
+    const classesCollection = client.db("sportsDB").collection("classes");
+    const instructorsCollection = client.db("sportsDB").collection("instructors");
+    const addClassCollection = client.db("sportsDB").collection("addClass");
 
   app.get('/classes', async(req,res) => {
         const result = await classesCollection.find().toArray();
@@ -39,6 +40,12 @@ async function run() {
         const result = await instructorsCollection.find().toArray()
         res.send(result)
   })
+
+  app.post('/addClass', async(req,res) => {
+        const item = req.body;
+        const result = await addClassCollection.insertOne(item)
+        res.send(result)
+      })
 
 
     // Send a ping to confirm a successful connection
