@@ -31,6 +31,15 @@ async function run() {
     const classesCollection = client.db("sportsDB").collection("classes");
     const instructorsCollection = client.db("sportsDB").collection("instructors");
     const addClassCollection = client.db("sportsDB").collection("addClass");
+    const usersCollection = client.db("sportsDB").collection("users");
+   
+//user relatate api
+ app.post('/users', async(req, res) => {
+  const user = req.body;
+   
+ })
+
+
 
   app.get('/classes', async(req,res) => {
         const result = await classesCollection.find().toArray();
