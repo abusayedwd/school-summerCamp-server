@@ -36,6 +36,11 @@ async function run() {
 //user relatate api
  app.post('/users', async(req, res) => {
   const user = req.body;
+  const query = {email:user.email}
+  const existuser = await usersCollection.findOne(query)
+  if(existuser){
+    return res.send({massege :'user already exist'})
+  }
   const result = await usersCollection.insertOne(user)
   res.send(result)
  })
